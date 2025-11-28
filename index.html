@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Snake Game</h1>
+        <div class="scoreboard">
+            <div class="score-item">
+                <span class="score-label">Level:</span>
+                <span class="score-value" id="level">1</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Score:</span>
+                <span class="score-value" id="score">0/100</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">High Score:</span>
+                <span class="score-value" id="highScore">0</span>
+            </div>
+        </div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        
+        <div class="snake-length-selector" id="snakeLengthSelector">
+            <div class="selector-content">
+                <h3>Select Game Speed</h3>
+                <div class="range-container">
+                    <input type="range" id="speedRange" min="1" max="20" value="10" class="range-slider">
+                    <div class="range-value">
+                        <span id="speedValue">10</span> (Slow ← → Fast)
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="startLevelBtn">Start Level</button>
+            </div>
+        </div>
+        
+        <div class="game-over-popup" id="gameOverPopup">
+            <div class="popup-content">
+                <h2 id="popupTitle">Game Over!</h2>
+                <p id="popupMessage">Your Score: <span id="finalScore">0</span>/100</p>
+                <p>Level Reached: <span id="levelReached">1</span> / 10</p>
+                <p>High Score: <span id="popupHighScore">0</span></p>
+                <div class="popup-buttons">
+                    <button class="btn btn-primary" id="restartBtn">Start New Game</button>
+                    <button class="btn btn-secondary" id="nextLevelBtn" style="display: none;">Next Level</button>
+                    <button class="btn btn-secondary" id="endBtn">Exit Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

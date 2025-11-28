@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #0d0d0d;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .button-group {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #00cc00;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #testOutput {
+            background: #000;
+            border: 1px solid #00ff00;
+            padding: 15px;
+            border-radius: 3px;
+            max-height: 600px;
+            overflow-y: auto;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .test-passed {
+            color: #00ff00;
+        }
+
+        .test-failed {
+            color: #ff0000;
+        }
+
+        .test-header {
+            color: #ffff00;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1a3a1a;
+            border: 1px solid #00ff00;
+            border-radius: 3px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .summary.all-pass {
+            background: #1a3a1a;
+            color: #00ff00;
+        }
+
+        .summary.has-fail {
+            background: #3a1a1a;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Snake Game - Test Suite</h1>
+        
+        <div class="button-group">
+            <button onclick="runTests()">Run All Tests</button>
+            <button onclick="clearOutput()">Clear Output</button>
+        </div>
+
+        <div id="testOutput">Ready to run tests. Click "Run All Tests" to start...</div>
+    </div>
+
+    <script src="test.js"></script>
+    <script>
+        function clearOutput() {
+            document.getElementById('testOutput').textContent = '';
+        }
+
+        function runTests() {
+            clearOutput();
+            const output = document.getElementById('testOutput');
+            
+            // Redirect console.log to our output div
+            const originalLog = console.log;
+            const originalError = console.error;
+            
+            console.log = function(...args) {
+                output.textContent += args.join(' ') + '\n';
+                output.scrollTop = output.scrollHeight;
+                originalLog.apply(console, args);
+            };
+            
+            console.error = function(...args) {
+                output.textContent += args.join(' ') + '\n';
+                output.scrollTop = output.scrollHeight;
+                originalError.apply(console, args);
+            };
+            
+            try {
+                runAllTests();
+            } catch (error) {
+                console.log('Error running tests: ' + error.message);
+            }
+            
+            // Restore original console methods
+            console.log = originalLog;
+            console.error = originalError;
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('load', () => {
+            // Uncomment to auto-run on load
+            // runTests();
+        });
+    </script>
+</body>
+</html>
